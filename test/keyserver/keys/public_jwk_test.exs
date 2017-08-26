@@ -17,14 +17,17 @@ defmodule Keyserver.JWKTest do
 			|> Poison.encode!()
 			|> PublicJWK.parse
 
+			assert elem(blob, 0) == :ok
+		end
 
-			assert blob == %PublicJWK{
-				kty: "RSA",
-				e: "AQAB",
-				use: "sig",
-				alg: "RS256",
-				n: "..."
+		test "it throws an error if there is missing data" do
+			blob = %{
+				kty: "RSA"
 			}
+			|> Poison.encode!()
+			|> PublicJWK.parse
+
+			assert elem(blob, 0) == :error
 		end
 	end
 end

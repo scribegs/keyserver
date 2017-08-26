@@ -14,8 +14,12 @@ defmodule Keyserver.PublicJWK do
 	}
 
 	def parse(json_blob) do
-		Poison.decode!(json_blob)
+		jwk = Poison.decode!(json_blob)
 		|> map_keys_to_atoms
-		|> (& struct(PublicJWK, &1)).()
+		|> (& struct!(PublicJWK, &1)).()
+
+		{:ok, jwk}
+	rescue err in ArgumentError ->
+		{:error, err.message}
 	end
 end
