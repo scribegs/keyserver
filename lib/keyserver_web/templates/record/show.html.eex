@@ -1,0 +1,18 @@
+<h2>Show Record</h2>
+
+<ul>
+
+  <li>
+    <strong>Id:</strong>
+    <%= @record.id %>
+  </li>
+
+  <li>
+    <strong>Key:</strong>
+    <%= @record.key %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: record_path(@conn, :edit, @record) %></span>
+<span><%= link "Back", to: record_path(@conn, :index) %></span>
